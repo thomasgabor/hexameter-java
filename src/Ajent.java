@@ -2,6 +2,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 
+/**
+ * This is an old demo class, please disregard this file. If you are looking for a code example,
+ * please have a look at the class ObstacleAgent!
+ */
 public class Ajent {
 
 	public static class Clock {
@@ -49,7 +53,6 @@ public class Ajent {
 						}
 					}
 					if ( updated ) {
-						//clock = newclock; // TODO find workaround here
 						System.out.println("\n\n::  Entering time period #" + Long.toString(clock.getTime()));
 						for ( Object bodiesKey : bodies.keySet() ) {
 							String name = (String) bodiesKey;
@@ -66,9 +69,10 @@ public class Ajent {
 							sensorItem.put("type", "proximity");
 							sensorParameter.add(sensorItem);
 							JSONArray proximityResponse = hx.ask("get", realm, "sensors", sensorParameter);
+							System.out.println(proximityResponse);
 							JSONArray prox = (JSONArray) ((JSONObject)proximityResponse.get(0)).get("value");
 							for ( int i = 1; i <= 24; i++ ) {
-								long proxValue = (long) ((JSONObject)prox.get(i-1)).get("value");
+								long proxValue = (long) ((JSONObject)prox.get(i-1)).get("value"); //TODO this should be double
 								if ( value < proxValue ) {
 									idx = i;
 									value = proxValue;
